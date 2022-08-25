@@ -1,17 +1,36 @@
 export interface InvoiceFacadeInputDto {
-  orderId: string;
-  amount: number;
+  name: string;
+  document: string;
+  street: string;
+  number: string;
+  complement: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  items: {
+      id: string;
+      name: string;
+      price: number;
+  }[];  
 }
 
 export interface InvoiceFacadeOutputDto {
-  transactionId: string;
-  orderId: string;
-  amount: number;
-  status: string;
-  createdAt: Date;
-  updatedAt: Date;
+  id: string;
+  name: string;
+  document: string;
+  street: string;
+  number: string;
+  complement: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  items: {
+      id: string;
+      name: string;
+      price: number;
+  }[];  
 }
 
 export default interface InvoiceFacadeInterface {
-  process(input: InvoiceFacadeInputDto): Promise<InvoiceFacadeOutputDto>;
+  create(input: InvoiceFacadeInputDto): Promise<InvoiceFacadeOutputDto>;
 }
