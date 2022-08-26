@@ -1,31 +1,10 @@
-import { Column, Model, PrimaryKey, Table } from "sequelize-typescript";
-import Product from "../domain/product.entity";
+import { Column, HasMany, Model, PrimaryKey, Table } from "sequelize-typescript";
+import ProductModel from "./product.model";
 
 @Table({
   tableName: "invoices",
   timestamps: false,
 })
-
-//address: Address; // value object
-//items: Product[]; // Product entity
-/*
-    id: string;
-    name: string;
-    document: string;
-    street: string;
-    number: string;
-    complement: string;
-    city: string;
-    state: string;
-    zipCode: string;
-    items: {
-        id: string;
-        name: string;
-        price: number;
-    }[];
-    total: number;
-*/
-
 export class InvoiceModel extends Model {
   @PrimaryKey
   @Column({ allowNull: false })
@@ -55,16 +34,9 @@ export class InvoiceModel extends Model {
   @Column({ allowNull: false })
   zipCode: string;
 
-  /*
-  items: {
-      id: string;
-      name: string;
-      price: number;
-  }[];
-  */
-
-  //@Column({ allowNull: false })
-  //items: Product[];
+  @Column({ allowNull: false })
+  @HasMany(() => ProductModel)
+  items: ProductModel[];
 
   @Column({ allowNull: false })
   total: number;
