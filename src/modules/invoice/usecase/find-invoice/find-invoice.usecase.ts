@@ -1,5 +1,4 @@
 import InvoiceGateway from "../../gateway/invoice.gateway";
-import ProductModel from "../../repository/product.model";
 import {
   FindInvoiceUseCaseInputDTO,
   FindInvoiceUseCaseOutputDTO,

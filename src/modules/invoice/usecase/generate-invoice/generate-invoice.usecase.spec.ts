@@ -40,8 +40,16 @@ describe("Generate a Invoice Usecase unit test", () => {
     expect(result.state).toEqual(input.state);
     expect(result.zipCode).toEqual(input.zipCode);
     expect(result.items).toStrictEqual([
-      { id: "1", name: "item 1", price: 10 }, 
-      { id: "2", name: "item 2", price: 20 },
-    ]);    
+      { 
+        id: input.items[0].id, 
+        name: input.items[0].name, 
+        price: input.items[0].price,
+      }, 
+      { 
+        id: input.items[1].id, 
+        name: input.items[1].name, 
+        price: input.items[1].price,
+      }, 
+    ]);
   });
 });

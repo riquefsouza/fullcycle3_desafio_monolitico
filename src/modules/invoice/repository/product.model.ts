@@ -5,7 +5,7 @@ import { InvoiceModel } from "./invoice.model";
   tableName: "products",
   timestamps: false,
 })
-export default class ProductModel extends Model {
+export class ProductModel extends Model {
   @PrimaryKey
   @Column({ allowNull: false })
   id: string;
@@ -17,7 +17,7 @@ export default class ProductModel extends Model {
   price: number;
 
   @ForeignKey(() => InvoiceModel)
-  @Column
+  @Column({ allowNull: true })
   invoiceId: string;
 
   @BelongsTo(() => InvoiceModel)

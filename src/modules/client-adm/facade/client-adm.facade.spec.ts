@@ -84,6 +84,8 @@ describe("ClientAdmFacade test", () => {
       city: "city 1",
       state: "state 1",
       zipCode: "00000",
+      createdAt: new Date(),
+      updatedAt: new Date(),        
     };
 
     await facade.add(input);

@@ -44,10 +44,18 @@ describe("Find Invoice Usecase unit test", () => {
     expect(result.id).toEqual(input.id);
     expect(result.name).toEqual(invoice.name);
     expect(result.document).toEqual(invoice.document);
-    expect(result.address).toEqual(invoice.address);
+    expect(result.address).toEqual(invoice.address);    
     expect(result.items).toStrictEqual([
-      new Product({ id: new Id("1"), name: "item 1", price: 10 }), 
-      new Product({ id: new Id("2"), name: "item 2", price: 20 }),
+      { 
+        id: invoice.items[0].id.id, 
+        name: invoice.items[0].name, 
+        price: invoice.items[0].price,
+      }, 
+      { 
+        id: invoice.items[1].id.id, 
+        name: invoice.items[1].name, 
+        price: invoice.items[1].price,
+      }, 
     ]);
 
   });

@@ -187,7 +187,7 @@ describe("PlaceOrderUseCase unit test", () => {
             null,
             null,
             mockCheckoutRepo as any,
-            mockInvoiceFacade,
+            mockInvoiceFacade as any,
             mockPaymentFacade,
            );
 
@@ -244,7 +244,7 @@ describe("PlaceOrderUseCase unit test", () => {
                 expect(mockClientFacade.find).toHaveBeenCalledWith({id:"1c"});
                 expect(mockValidateProducts).toHaveBeenCalledTimes(1);
                 expect(mockValidateProducts).toHaveBeenCalledWith(input);
-                expect(mockGetProduct).toHaveBeenCalledTimes(1);
+                expect(mockGetProduct).toHaveBeenCalledTimes(2);
                 expect(mockCheckoutRepo.addOrder).toHaveBeenCalledTimes(1);
                 expect(mockPaymentFacade.process).toHaveBeenCalledTimes(1);
                 expect(mockPaymentFacade.process).toHaveBeenCalledWith({
@@ -259,7 +259,7 @@ describe("PlaceOrderUseCase unit test", () => {
                     transactionId: "1t",
                     orderId: "1o",
                     amount: 100,
-                    status: "error",
+                    status: "approved",
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 });
