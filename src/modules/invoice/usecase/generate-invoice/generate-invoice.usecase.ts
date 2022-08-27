@@ -14,7 +14,7 @@ export default class GenerateInvoiceUseCase {
 
   async execute(input: GenerateInvoiceUseCaseInputDto): Promise<GenerateInvoiceUseCaseOutputDto> {
     const props = {
-      //id: new Id(input.id) || new Id(),
+      id: new Id(input.id),
       name: input.name,
       document: input.document,
       address: new Address({
@@ -25,16 +25,17 @@ export default class GenerateInvoiceUseCase {
         state: input.state,
         zipCode: input.zipCode,
       }),
-      items: input.items.map((item) => (
-        new Product({
+      items: input.items.map((item) => {
+        return new Product({
           id: new Id(item.id),
           name: item.name,
           price: item.price,
         })
-      )),
+      }),
     };
 
-    const invoice = await this._invoiceRepository.generate(new Invoice(props));
+    const invoice = new Invoice(props);
+    this._invoiceRepository.generate(invoice);
 
     return {
       id: invoice.id.id,

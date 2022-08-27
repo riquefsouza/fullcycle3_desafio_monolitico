@@ -7,23 +7,23 @@ import InvoiceFacadeInterface, {
 
 export interface UseCaseProps {
   findUsecase: UseCaseInterface;
-  createUsecase: UseCaseInterface;
+  generateUsecase: UseCaseInterface;
 }
 
 export default class InvoiceFacade implements InvoiceFacadeInterface {
   private _findUsecase: UseCaseInterface;
-  private _createUsecase: UseCaseInterface;
+  private _generateUsecase: UseCaseInterface;
 
   constructor(usecaseProps: UseCaseProps) {
     this._findUsecase = usecaseProps.findUsecase;
-    this._createUsecase = usecaseProps.createUsecase;
+    this._generateUsecase = usecaseProps.generateUsecase;
   }
 
-  async create(input: InvoiceFacadeInputDto): Promise<InvoiceFacadeOutputDto> {
-    return await this._createUsecase.execute(input);
+  generate(input: InvoiceFacadeInputDto): Promise<InvoiceFacadeOutputDto> {
+    return this._generateUsecase.execute(input);
   }
-  async find(input: FindInvoiceFacadeInputDto): Promise<InvoiceFacadeOutputDto>{
-    return await this._findUsecase.execute(input);
+  find(input: FindInvoiceFacadeInputDto): Promise<InvoiceFacadeOutputDto>{
+    return this._findUsecase.execute(input);
   }
 
 }

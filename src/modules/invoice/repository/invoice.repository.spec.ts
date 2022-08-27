@@ -47,25 +47,30 @@ describe("InvoiceRepository test", () => {
 
     const invoice = new Invoice(invoiceProps);
     const invoiceRepository = new InvoiceRepository();
-    const invoiceDb = await invoiceRepository.generate(invoice);
+    await invoiceRepository.generate(invoice);
 
-    expect(invoiceProps.id.id).toEqual(invoiceDb.id.id);
+    const invoiceDb = await InvoiceModel.findOne({
+      where: { id: invoiceProps.id.id },
+      include: [ProductModel],
+    });
+
+    expect(invoiceProps.id.id).toEqual(invoiceDb.id);
     expect(invoiceProps.name).toEqual(invoiceDb.name);
     expect(invoiceProps.document).toEqual(invoiceDb.document);
-    expect(invoiceProps.address.street).toEqual(invoiceDb.address.street);
-    expect(invoiceProps.address.number).toEqual(invoiceDb.address.number);
-    expect(invoiceProps.address.complement).toEqual(invoiceDb.address.complement);
-    expect(invoiceProps.address.city).toEqual(invoiceDb.address.city);
-    expect(invoiceProps.address.state).toEqual(invoiceDb.address.state);
-    expect(invoiceProps.address.zipCode).toEqual(invoiceDb.address.zipCode);
+    expect(invoiceProps.address.street).toEqual(invoiceDb.street);
+    expect(invoiceProps.address.number).toEqual(invoiceDb.number);
+    expect(invoiceProps.address.complement).toEqual(invoiceDb.complement);
+    expect(invoiceProps.address.city).toEqual(invoiceDb.city);
+    expect(invoiceProps.address.state).toEqual(invoiceDb.state);
+    expect(invoiceProps.address.zipCode).toEqual(invoiceDb.zipCode);
     expect(invoiceProps.items).toStrictEqual([
         new Product({ 
-          id: new Id(invoiceDb.items[0].id.id), 
+          id: new Id(invoiceDb.items[0].id), 
           name: invoiceDb.items[0].name, 
           price: invoiceDb.items[0].price,
         }), 
         new Product({ 
-          id: new Id(invoiceDb.items[1].id.id), 
+          id: new Id(invoiceDb.items[1].id), 
           name: invoiceDb.items[1].name, 
           price: invoiceDb.items[1].price,
         }), 
@@ -73,12 +78,10 @@ describe("InvoiceRepository test", () => {
 
   });
 
-  /*
-
   it("should find a invoice", async () => {
     const invoiceRepository = new InvoiceRepository();
 
-    InvoiceModel.create({
+    await InvoiceModel.create({
       id: "1",
       name: "Invoice 1",
       document: "document 1",
@@ -89,14 +92,16 @@ describe("InvoiceRepository test", () => {
       state: "state 1",
       zipCode: "00000",
       items: [
-        new Product({ id: new Id("1"), name: "item 1", price: 10 }), 
-        new Product({ id: new Id("2"), name: "item 2", price: 20 }),
+        new ProductModel({ id: "1", name: "item 1", price: 10 }), 
+        new ProductModel({ id: "2", name: "item 2", price: 20 }),
       ],
+      total: 30,
       createdAt: new Date(),
       updatedAt: new Date(),
-    });
+    },
+    {include: [ProductModel]});    
 
-    const invoice = await invoiceRepository.find("1", {include: [ProductModel]});
+    const invoice = await invoiceRepository.find("1");
 
     expect(invoice.id.id).toEqual("1");
     expect(invoice.name).toEqual("Invoice 1");
@@ -111,6 +116,7 @@ describe("InvoiceRepository test", () => {
       new Product({ id: new Id("1"), name: "item 1", price: 10 }), 
       new Product({ id: new Id("2"), name: "item 2", price: 20 }),
     ]);
+    expect(invoice.total).toEqual(30);
   });
-  */
+
 });
