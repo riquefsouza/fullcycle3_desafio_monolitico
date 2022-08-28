@@ -1,5 +1,6 @@
 import StoreCatalogFacade from "../facade/store-catalog.facade";
 import ProductRepository from "../repository/product.repository";
+import AddProductUseCase from "../usecase/add-product/add-product.usecase";
 import FindAllProductsUsecase from "../usecase/find-all-products/find-all-products.usecase";
 import FindProductUseCase from "../usecase/find-product/find-product.usecase";
 
@@ -8,10 +9,12 @@ export default class StoreCatalogFacadeFactory {
     const productRepository = new ProductRepository();
     const findUseCase = new FindProductUseCase(productRepository);
     const findAllUseCase = new FindAllProductsUsecase(productRepository);
+    const addUsecase = new AddProductUseCase(productRepository);
 
     const facade = new StoreCatalogFacade({
       findUseCase: findUseCase,
       findAllUseCase: findAllUseCase,
+      addUseCase: addUsecase,
     });
     return facade;
   }

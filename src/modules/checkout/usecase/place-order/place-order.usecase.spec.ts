@@ -163,7 +163,7 @@ describe("PlaceOrderUseCase unit test", () => {
                 complement: "",
                 city: "some city",
                 state: "some state",
-                zipCode: "000",            
+                zipCode: "000",
             };
             
            const mockClientFacade = {

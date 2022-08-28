@@ -1,0 +1,111 @@
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "id": "1",
+    "name": "Product 1",
+    "description": "Product 1 description",
+    "purchasePrice": 100,
+    "stock": 10
+}
+
+###
+GET http://localhost:3000/products/1
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "id": "2",
+    "name": "Product 2",
+    "description": "Product 2 description",
+    "purchasePrice": 200,
+    "stock": 10
+}
+
+###
+GET http://localhost:3000/products/2
+
+###
+POST http://localhost:3000/clients
+Content-Type: application/json
+
+{
+    "id": "1",
+    "name": "Client 1",
+    "email": "x@x.com",
+    "document": "Address 1",
+    "street": "Street 1",
+    "number": "000",
+    "complement": "apartment 1",
+    "city": "city 1",
+    "state": "state 1",
+    "zipCode": "00000"
+}
+
+###
+GET http://localhost:3000/clients/1
+
+###
+POST http://localhost:3000/invoice
+Content-Type: application/json
+
+{
+    "id": "1",
+    "name": "Invoice 1",
+    "document": "document 1",
+    "street": "street 1",
+    "number": "000",
+    "complement": "apartment 1",
+    "city": "city 1",
+    "state": "state 1",
+    "zipCode": "00000",
+    "items": [
+        { "id": "1", "name": "item 1", "price": 10 }, 
+        { "id": "2", "name": "item 2", "price": 20 }
+    ]
+}
+
+###
+GET http://localhost:3000/invoice/1
+
+###
+POST http://localhost:3000/store
+Content-Type: application/json
+
+{
+    "id": "1",
+    "name": "Product 1",
+    "description": "Product 1 description",
+    "salesPrice": 100
+}
+
+###
+GET http://localhost:3000/store/1
+
+###
+POST http://localhost:3000/store
+Content-Type: application/json
+
+{
+    "id": "2",
+    "name": "Product 2",
+    "description": "Product 2 description",
+    "salesPrice": 200
+}
+
+###
+GET http://localhost:3000/store/2
+
+###
+POST http://localhost:3000/checkout
+Content-Type: application/json
+
+{
+    "clientId": "1", 
+    "products": [{"productId": "1"},{"productId": "2"}]
+}
+
+###
+GET http://localhost:3000/checkout/cce784d5-46c2-4325-9250-f42e16a3d40e
